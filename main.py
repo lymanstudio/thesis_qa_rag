@@ -182,7 +182,7 @@ def main():
         query_chain = q_chain(llm = ChatOpenAI(model = 'gpt-3.5-turbo'))
 
         ## A chain
-        paper_qa_chain = a_chain(
+        answer_chain = a_chain(
             vector_store= vs,
             retriever=retriever,
             llm = ChatOpenAI(model = 'gpt-3.5-turbo')
@@ -192,7 +192,7 @@ def main():
 
             st.write(f"Q: {user_query}")
             with st.spinner('Wait for it...'):
-                answer = paper_qa_chain.invoke(
+                answer = answer_chain.invoke(
                     query(
                         query_chain,
                         reference=meta_data_dict,
