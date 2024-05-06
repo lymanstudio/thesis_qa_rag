@@ -187,7 +187,6 @@ def main():
             retriever=retriever,
             llm = ChatOpenAI(model = 'gpt-3.5-turbo')
         )
-        
         if user_query := st.chat_input("Ask anything about your paper."):
 
             st.write(f"Q: {user_query}")
