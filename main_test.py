@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
 
 
-file_name = "graph_representation_learning.pdf"
+file_name = "framework_for_indoor_elements_classification_via_inductive_learning_on_floor_plan_graphs.pdf"
 loaded_pdf = load_pdf_local(file_name = file_name)
 thesis_name = file_name.split('.')[0]
 vectorstore_path = os.path.join("./", "model/vectorstore/", thesis_name + "_index")

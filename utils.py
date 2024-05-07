@@ -10,7 +10,7 @@ def load_keys():
     return load_dotenv(dotenv_path=".env")
 
 def check_docs(docs, show_len = 100, show_docs = 5, meta_show_only_keys = False):
-    print(f"▶︎ No. of Documents: {len(docs)} \n\n▶︎ Contents")
+    print(f"▶︎ No. of Documents: {len(docs)} \n\n▶︎ Contents\n")
     for idx, doc in enumerate(docs):
         if idx < show_docs or idx == len(docs) - 1:
             show_contet = doc.page_content[:show_len] + "..." if len(doc.page_content) > show_len else doc.page_content
@@ -22,14 +22,16 @@ def check_docs(docs, show_len = 100, show_docs = 5, meta_show_only_keys = False)
             continue
 
 def check_docs_str(docs, show_len = 100, show_docs = 5, meta_show_only_keys = False):
-    to_return = f"▶︎ No. of Documents: {len(docs)} \n\n▶︎ Contents"
+    to_return = f"▶︎ No. of Documents: {len(docs)} \n\n"
+    to_return += f"※ Metadata: {docs[0].metadata if meta_show_only_keys == False else str([k for k in docs[0].metadata.keys()])}\n\n"
+
+    to_return += "▶︎ Contents\n"
     for idx, doc in enumerate(docs):
         if idx < show_docs or idx == len(docs) - 1:
             show_contet = doc.page_content[:show_len] + "..." if len(doc.page_content) > show_len else doc.page_content
-                
             if idx == len(docs) - 1 and len(docs) != 1:
                 to_return += "\n...\n"
-            to_return += f"* Doc {str(idx)}: {show_contet}\n※ Metadata: {doc.metadata if meta_show_only_keys == False else str([k for k in doc.metadata.keys()])}\n"
+            to_return += f"* Doc {str(idx)}: {show_contet}\n\n"
         else:
             continue
     return to_return
