@@ -1,13 +1,9 @@
 import os
 import time
-from dotenv import load_dotenv
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.documents import Document
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_openai import OpenAIEmbeddings
-
-def load_keys():
-    return load_dotenv(dotenv_path=".env")
 
 def check_docs(docs, show_len = 100, show_docs = 5, meta_show_only_keys = False):
     print(f"▶︎ No. of Documents: {len(docs)} \n\n▶︎ Contents\n")
@@ -72,7 +68,6 @@ def clean_a_paper(doc, prv_page, chain):
             "prv_page" : prv_page,
             "content" : doc.page_content
         })
-
 
 def chunk_paper(docs):
     semanticChunker = SemanticChunker(
