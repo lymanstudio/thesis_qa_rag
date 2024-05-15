@@ -144,7 +144,7 @@ def main():
 
                 if os.path.exists(vectorstore_path) == False:
                     with st.status("Constructing a new vector store for the uploaded paper..."):
-                        progress_text = f"Cleaning the paper...(page no. {1} [{1}/{len(loaded_pdf + 1)}])"
+                        progress_text = f"Cleaning the paper...(page no. {1} [{1}/{len(loaded_pdf) + 1}])"
                         progress_bar = st.progress(0, text = progress_text)
                         
                         clean_chain = paper_clean_chain()
