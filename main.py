@@ -87,6 +87,21 @@ def main():
                         key = 'k'
                     )
                     os.environ['OPENAI_API_KEY'] = api_key
+                    search_type = st.selectbox(
+                        label = 'Select the search type',
+                        options = ("similarity", "mmr", "similarity_score_threshold"),
+                    )
+
+                    if search_type == 'similarity_score_threshold':
+                        threshold = st.slider(
+                            label = 'Select the threshold',
+                            min_value = .5,
+                            max_value = 1.0,
+                            value = .75,
+                            step = .05
+                        )
+                    else:
+                        threshold = .75
                 else:
                     st.error(f"▶ API Key Status: Invaild {"OpenAI" if llm_type == "ChatGPT" else ""} API key.")
                     st.stop()
@@ -179,7 +194,13 @@ def main():
 
             with st.status("Setting up QA bot..."):
                 # Set Up retriever out of vector store
-                retriever = vs.as_retriever(search_type = "mmr", search_kwargs = {"k": 10})
+                retriever = vs.as_retriever(
+                    search_type = search_type, 
+                    search_kwargs = {
+                        "k": add_k_select,
+                        "score_threshold": threshold
+                    }
+                )
 
                 # Make a QA Chains
                 ## Q chain
@@ -209,7 +230,7 @@ def main():
             st.markdown(m['content'])
 
     if input_q := st.chat_input("Ask anything about your paper."):
-        # st.chat_input을 핟당함과 동시에 None이 들어가지 않게 := 로 할당 후 if 문의로 체크
+        # st.chat_input을 할당함과 동시에 None이 들어가지 않게 := 로 할당 후 if 문의로 체크
         with st.chat_message("user"):
             st.markdown(input_q)
         st.session_state.messages.append({"role": "user", "content":input_q})
