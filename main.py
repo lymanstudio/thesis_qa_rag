@@ -48,8 +48,8 @@ def main():
     status_ok = False
 
     st.set_page_config(
-        page_title = "Paper RAG test",
-        page_icon = ":notes:"
+        page_title = "Thesis Paper RAG",
+        page_icon = ":open_book:"
     )
 
     st.title("Paper RAG")
