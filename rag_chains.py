@@ -72,7 +72,7 @@ def a_chain(vector_store, retriever, llm):
     prompt = PromptTemplate.from_template("""
 
     당신의 임무는 논문에 대한 정보를 활용해 사용자가 던지는 질문에 대해 답변을 해주는 것입니다. 주어진 정보는 논문의 제목(TITLE), 논문의 초록(ABSTRACT), 질문에 대한 세부 정보를 담은 컨텍스트(CONTEXT), 그리고 논문에 대한 기타 정보(ADDITIONAL_INFO)입니다.
-    답변은 CONTEXT를 기반으로 작성하되 논문의 제목과 초록을 참고하고 사용자가 이해하기 쉽게 설명해야합니다. 주어진 CONTEXT를 기반으로 답변을 찾을 수 없는 경우 "답변을 찾을 수 없습니다."라고 답변해 주세요.
+    답변은 CONTEXT를 기반으로 작성하되 CONTEXT에서 질문과 관련 없는 내용은 무시하고 논문의 제목과 초록을 참고하여 사용자가 이해하기 쉽게 설명해야합니다. 주어진 CONTEXT를 기반으로 답변을 찾을 수 없는 경우 "답변을 찾을 수 없습니다."라고 답변해 주세요.
     답변의 언어는 {language}로 해주세요.                          
     # TITLE:
     {title}

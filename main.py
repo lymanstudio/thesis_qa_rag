@@ -1,7 +1,6 @@
 import streamlit as st
 import openai
 import math
-import time
 from utils import *
 from vectorstore import *
 from rag_chains import *
@@ -73,7 +72,7 @@ def main():
             api_key = st.text_input("API Key", key = "chatbot_api_key", type = "password")
 
             if not api_key:
-                st.info(f"Please input your {"OpenAI" if llm_type == "ChatGPT" else ""} API key to continue.")
+                st.info(f"Please input your {'OpenAI' if llm_type == 'ChatGPT'else ''} API key to continue.")
                 st.stop()
 
             if llm_type == 'ChatGPT':
@@ -115,10 +114,10 @@ def main():
             )
 
             if upload_file is not None:
-                with open(upload_file.name , mode = 'wb') as w:
+                with open(os.path.join("./data", upload_file.name) , mode = 'wb') as w:
                     w.write(upload_file.getvalue())
-
-                loaded_pdf = load_pdf(file_name = upload_file.name)
+                    # a = 1
+                loaded_pdf = load_pdf(file_name = os.path.join("./data", upload_file.name))
                 if loaded_pdf is not None:
                     st.success("PDF upload completed.")
                     st.write(f"filename : {upload_file.name}")
@@ -145,7 +144,7 @@ def main():
 
                 if os.path.exists(vectorstore_path) == False:
                     with st.status("Constructing a new vector store for the uploaded paper..."):
-                        progress_text = f"Cleaning the paper...(page no. {1} [{1}/{len(loaded_pdf)}])"
+                        progress_text = f"Cleaning the paper...(page no. {1} [{1}/{len(loaded_pdf + 1)}])"
                         progress_bar = st.progress(0, text = progress_text)
                         
                         clean_chain = paper_clean_chain()
