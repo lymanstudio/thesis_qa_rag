@@ -102,7 +102,7 @@ def main():
                     else:
                         threshold = .75
                 else:
-                    st.error(f"▶ API Key Status: Invaild {"OpenAI" if llm_type == "ChatGPT" else ""} API key.")
+                    st.error(f"▶ API Key Status: Invaild {'OpenAI' if llm_type == 'ChatGPT' else ''} API key.")
                     st.stop()
 
             
