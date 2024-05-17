@@ -201,7 +201,7 @@ def main():
                     }
                 )
 
-                # Make a QA Chains
+                # Make Q and A Chains
                 ## Q chain
                 meta_data_dict = "\n".join(f"{k} : {v}" for k, v in next(iter(vs.docstore._dict.values())).metadata.items())
                 query_chain = q_chain(llm = ChatOpenAI(model = 'gpt-3.5-turbo'))
